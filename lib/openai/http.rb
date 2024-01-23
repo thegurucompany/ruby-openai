@@ -12,6 +12,12 @@ module OpenAI
       end&.body)
     end
 
+    def download(path:)
+      conn.get(uri(path: path)) do |req|
+        req.headers = headers
+      end&.body
+    end
+
     def post(path:)
       parse_jsonl(conn.post(uri(path: path)) do |req|
         req.headers = headers
